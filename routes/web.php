@@ -29,11 +29,14 @@ Route::group(['prefix'=>'booking','as'=>'booking.'], function(){
         return view('booking.create');
     })->name('new');
 
-    //
+    //Create booking
     Route::post('create', 'BookingController@store')->name('store');
 
     // Get User Bookings
-    Route::get('/{user}/bookings', 'BookingController@list')->name('list');
+    Route::get('/{user}/manage', 'BookingController@list')->name('list');
+
+    //Cancel Booking
+    Route::delete('/delete/{id}', 'BookingController@delete')->name('delete');
 
 
 });

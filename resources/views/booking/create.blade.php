@@ -36,8 +36,8 @@
                                 <div class="col-md-6">
 
                                     <select id="course" name="course">
-                                        <option value="green_course">Green Course</option>
-                                        <option value="red_course">Red Course</option>
+                                        <option value="Green Course">Green Course</option>
+                                        <option value="Red Course">Red Course</option>
                                     </select>
                                 </div>
                             </div>
@@ -66,4 +66,5 @@
             </div>
         </div>
     </div>
+
 @endsection

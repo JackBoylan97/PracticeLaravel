@@ -34,11 +34,12 @@ class BookingController extends Controller
 
     }
 
-    public function deleteBooking($id)
+    public function delete(User $user, $id)
     {
-        $booking = Booking::where('id','=',$id);
-        $booking->delete();
 
+        $booking = $user->bookings->find($id);
+
+        $booking->delete();
         //put a return statement for informing the user that it has been deleted
     }
 }
