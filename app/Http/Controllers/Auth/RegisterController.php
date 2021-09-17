@@ -30,6 +30,17 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/home';
 
+    /*
+     * Plan for booking app:
+     *
+     * 1. Create migrations (normalisation)
+     * 2. Create models (entities)
+     * 3. Create routes (actions)
+     * 4. Create controllers
+     * 5. Create views
+     *
+     **/
+
     /**
      * Create a new controller instance.
      *
