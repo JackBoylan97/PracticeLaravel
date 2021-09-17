@@ -22,8 +22,20 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['prefix'=>'booking','as'=>'booking.'], function(){
 
-Route::get('/booking', 'BookingController@getBookings')->name('bookings');
+    //booking form
+    Route::get('new', function () {
+        return view('booking.create');
+    })->name('new');
 
-Route::post('/bookings/', 'OrganisationController@testRoute');
+    //
+    Route::post('create', 'BookingController@store')->name('store');
+
+    // Get User Bookings
+    Route::get('/{user}/bookings', 'BookingController@list')->name('list');
+
+
+});
+
 

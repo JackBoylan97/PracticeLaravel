@@ -13,6 +13,7 @@ class CreateBaseTables extends Migration
      */
     public function up()
     {
+
         Schema::create('courses', function (Blueprint $table) { // Maps to Course.php
             $table->bigIncrements('id');
             $table->string('name', 50);
@@ -28,6 +29,8 @@ class CreateBaseTables extends Migration
             $table->dateTime('tee_time'); // Time the booking tees off at
             $table->string('course');
             $table->timestamps(); //created_at updated_at
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
         // Modify the users table to add a phone number
