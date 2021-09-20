@@ -22,7 +22,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix'=>'booking','as'=>'booking.'], function(){
+Route::group(['prefix'=>'booking','as'=>'booking.','middleware' => ['auth']], function(){
 
     //booking form
     Route::get('new', function () {

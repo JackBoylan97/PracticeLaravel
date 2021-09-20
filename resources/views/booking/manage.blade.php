@@ -1,6 +1,9 @@
 @extends('layouts.welcome')
 @section('content')
-
+    <div class="container">
+        <div class="row justify-content-center">
+    <div class="col-md-8">
+    <div class="card">
     <table class="table">
         <thead>
         <tr>
@@ -26,5 +29,8 @@
         @endforeach
         </tbody>
     </table>
-
+    </div>
+    </div>
+        </div>
+    </div>
 @endsection
