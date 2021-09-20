@@ -29,6 +29,8 @@ Route::group(['prefix'=>'booking','as'=>'booking.','middleware' => ['auth']], fu
         return view('booking.create');
     })->name('new');
 
+    Route::get('availability/{date}', 'BookingController@availability')->name('availability');
+
     //Create booking
     Route::post('create', 'BookingController@store')->name('store');
 

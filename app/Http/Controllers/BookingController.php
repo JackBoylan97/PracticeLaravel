@@ -13,10 +13,20 @@ class BookingController extends Controller
     public function list(User $user)
     {
         $bookings = $user->bookings;
-        return view('booking.manage')->with('bookings',$bookings);
+        return view('booking.manage')->with('bookings', $bookings);
 
     }
 
+    public function availability($date)
+    {
+        $bookings = Booking::whereDate('tee_time', '=', date($date))->get();
+        $booked_slots = $bookings->tee_time;
+
+        $available_times = BookingService::getAvailableTimes($booked_slots);
+
+
+
+    }
     public function store(Request $request)
     {
         $booking = Booking::create([

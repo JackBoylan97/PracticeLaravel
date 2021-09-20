@@ -46,9 +46,12 @@
                                 <label for="tee_time" class="col-md-4 col-form-label text-md-right">{{ __('Tee Time') }}</label>
 
                                 <div class="col-md-6">
-
-                                    <input type="datetime-local" id="tee_time" name="tee_time">
-                            </div>
+                                    <input type="date" name="tee_date" id="tee_date" min="<?= date('Y-m-d'); ?>">
+                                    <select class="form-select" size="3" aria-label="size 3 select example">
+                                        <option selected>Select a time</option>
+                                        <option value=""></option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-group row mb-0">
@@ -67,4 +70,13 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+        $('date').on('change', function() {
+
+            $.get( "/check-availability", { date: this.value }, function( data ) {
+                console.log( data );
+            });
+        });
+
+    </script>
 @endsection

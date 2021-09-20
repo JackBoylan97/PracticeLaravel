@@ -24,4 +24,10 @@ class Booking extends Model
  {
      return $this->belongsTo('App\Course','course');
  }
+
+ public function getTeeTimeAttribute($value)
+ {
+     return date_format($value, 'g:i A');
+
+ }
 }
