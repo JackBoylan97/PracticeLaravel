@@ -36,7 +36,7 @@ Route::group(['prefix'=>'booking','as'=>'booking.'], function(){
     Route::get('/{user}/manage', 'BookingController@list')->name('list');
 
     //Cancel Booking
-    Route::delete('/delete/{id}', 'BookingController@delete')->name('delete');
+    Route::delete('{booking}/delete', 'BookingController@delete')->name('delete');
 
 
 });

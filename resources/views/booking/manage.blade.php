@@ -16,7 +16,11 @@
             <td>{{$booking->course}}</td>
             <td>{{$booking->persons}}</td>
             <td>{{$booking->tee_time}}</td>
-            <td><a href="{{route('booking.delete')}}" class="btn btn-danger">Delete</a>
+            <td><form action="{{ route('booking.delete', ['booking' => $booking->id]) }}" method="post">
+                    <input class="btn btn-default" type="submit" value="Delete" />
+                    @method('delete')
+                    @csrf
+                </form>
             </td>
         </tr>
         @endforeach
