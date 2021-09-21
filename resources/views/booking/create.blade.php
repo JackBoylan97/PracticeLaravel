@@ -1,5 +1,6 @@
 @extends('layouts.welcome')
 @section('content')
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -36,8 +37,8 @@
                                 <div class="col-md-6">
 
                                     <select id="course" name="course">
-                                        <option value="Green Course">Green Course</option>
-                                        <option value="Red Course">Red Course</option>
+                                        <option value="1">Green Course</option>
+                                        <option value="2">Red Course</option>
                                     </select>
                                 </div>
                             </div>
@@ -47,8 +48,7 @@
 
                                 <div class="col-md-6">
                                     <input type="date" name="tee_date" id="tee_date" min="<?= date('Y-m-d'); ?>">
-                                    <select class="form-select" size="3" aria-label="size 3 select example">
-                                        <option selected>Select a time</option>
+                                    <select name="tee_time" id="tee_time" class="form-select" size="3" aria-label="size 3 select example">
                                         <option value=""></option>
                                     </select>
                                 </div>
@@ -69,13 +69,21 @@
             </div>
         </div>
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <script type="text/javascript">
-        $('date').on('change', function() {
+        $(document).ready(function() {
+            $('#tee_date').change(function () {
 
-            $.get( "/check-availability", { date: this.value }, function( data ) {
-                console.log( data );
-            });
+                $.get("/booking/"+$('#course').val() +"/availability/" + this.value, function (data) {
+
+                    var option = '';
+                    for (var i = 0; i < data.length; i++) {
+                        option += '<option value="' + data[i] + '">' + data[i] + '</option>';
+                    }
+                    $('#tee_time').append(option);
+                });
+            })
         });
 
     </script>

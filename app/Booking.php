@@ -11,7 +11,7 @@ class Booking extends Model
      'phone',
      'persons',
      'tee_time',
-     'course',
+     'course_id',
      'user_id'
  ];
 
@@ -25,9 +25,18 @@ class Booking extends Model
      return $this->belongsTo('App\Course','course');
  }
 
+ //Convert timeslots to readable format
  public function getTeeTimeAttribute($value)
  {
-     return date_format($value, 'g:i A');
+     $date = date_create($value);
+
+     return date_format($date, 'g:i A');
 
  }
+//Convert booking to datetime format
+ public  function  setTeeTimeAttribute($value)
+ {
+     $this->attributes['tee_time'] = date('Y-m-d H:i:s', strtotime("$value"));
+ }
+
 }

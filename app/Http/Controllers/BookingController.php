@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Booking;
+use App\Services\BookingService;
 Use App\User;
+Use App\Course;
 use Illuminate\Http\Request;
+
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -17,24 +21,27 @@ class BookingController extends Controller
 
     }
 
-    public function availability($date)
+    public function availability(Course $course, $date)
     {
-        $bookings = Booking::whereDate('tee_time', '=', date($date))->get();
-        $booked_slots = $bookings->tee_time;
+        $booked_slots = $course->bookings()->whereDate('tee_time',date($date))->get()->pluck('tee_time');
 
-        $available_times = BookingService::getAvailableTimes($booked_slots);
+        $booked_slots = $booked_slots->toArray();
 
+        $interval = $course->tee_time_interval;
+        $available_times = (new \App\Services\BookingService)->getAvailableTimes($interval, $booked_slots);
+
+        return $available_times;
 
 
     }
     public function store(Request $request)
     {
         $booking = Booking::create([
-            'email'=> Auth::user()->email,
+            'email'=> $request->email,
             'phone'=>$request->phone,
             'persons'=>$request->persons,
-            'course'=>$request->course,
-            'tee_time'=>$request->tee_time,
+            'course_id'=>$request->course,
+            'tee_time'=>$request->tee_date . $request->tee_time ,
             'user_id'=> Auth::user()->id
         ]);
 

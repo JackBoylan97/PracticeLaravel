@@ -15,7 +15,7 @@ class CreateBaseTables extends Migration
     {
 
         Schema::create('courses', function (Blueprint $table) { // Maps to Course.php
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name', 50);
             $table->integer('tee_time_interval')->default(10 /* 10 minutes */); // how far apart can the bookings be
             $table->timestamps();
@@ -27,7 +27,8 @@ class CreateBaseTables extends Migration
             $table->string('phone', 30)->nullable(); // this will be null if they are register
             $table->integer('persons');
             $table->dateTime('tee_time'); // Time the booking tees off at
-            $table->string('course');
+            $table->integer('course_id')->unsigned();
+            $table->foreign('course_id')->references('id')->on('courses');
             $table->timestamps(); //created_at updated_at
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
